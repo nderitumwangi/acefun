@@ -78,6 +78,17 @@
       'Curl' => 'Ixudra\\Curl\\Facades\\Curl',
     ),
   ),
+  'jackiedo/dotenv-editor' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Jackiedo\\DotenvEditor\\DotenvEditorServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'DotenvEditor' => 'Jackiedo\\DotenvEditor\\Facades\\DotenvEditor',
+    ),
+  ),
   'jenssegers/agent' => 
   array (
     'providers' => 

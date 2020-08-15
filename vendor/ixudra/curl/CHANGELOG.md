@@ -2,6 +2,22 @@
 
 All Notable changes to `ixudra/curl` will be documented in this file
 
+## 6.20.0 - 2020-08-07
+### Fixed
+- Data is now passed as POST parameters instead of GET for `DELETE` REQUESTS
+
+### Added
+- Additional docblocks
+- GET parameters are added to the URL on file download
+
+## 6.19.0 - 2020-03-03
+### Added
+- Added `withConnectTimeout()` method
+
+## 6.17.0 - 2019-09-13
+### Added
+- Added support for multiple response headers with the same name
+
 ## 6.16.0 - 2017-12-07
 ### Added
 - Added method to return response headers in the response objects

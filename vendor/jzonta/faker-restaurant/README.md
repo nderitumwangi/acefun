@@ -38,8 +38,16 @@ Language specific formatters
 -----
 
 ```
+de_AT -> \FakerRestaurant\Provider\de_AT\Restaurant
+de_DE -> \FakerRestaurant\Provider\de_DE\Restaurant
 en_US -> \FakerRestaurant\Provider\en_US\Restaurant
+es_PE -> \FakerRestaurant\Provider\es_PE\Restaurant 
 fr_FR -> \FakerRestaurant\Provider\fr_FR\Restaurant
-pt_BR -> \FakerRestaurant\Provider\pt_BR\Restaurant
+id_ID -> \FakerRestaurant\Provider\id_ID\Restaurant
+it_IT -> \FakerRestaurant\Provider\it_IT\Restaurant
 ja_JP -> \FakerRestaurant\Provider\ja_JP\Restaurant
+lt_LT -> \FakerRestaurant\Provider\lt_LT\Restaurant
+pt_BR -> \FakerRestaurant\Provider\pt_BR\Restaurant
+sv_SE -> \FakerRestaurant\Provider\sv_SE\Restaurant
+vi_VN -> \FakerRestaurant\Provider\vi_VN\Restaurant
 ```

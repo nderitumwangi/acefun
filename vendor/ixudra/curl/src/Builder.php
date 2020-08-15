@@ -13,7 +13,7 @@ class Builder {
         'RETURNTRANSFER'        => true,
         'FAILONERROR'           => false,
         'FOLLOWLOCATION'        => false,
-        'CONNECTTIMEOUT'        => '',
+        'CONNECTTIMEOUT'        => 30,
         'TIMEOUT'               => 30,
         'USERAGENT'             => '',
         'URL'                   => '',
@@ -60,6 +60,17 @@ class Builder {
     public function withTimeout($timeout = 30.0)
     {
         return $this->withCurlOption( 'TIMEOUT_MS', ($timeout * 1000) );
+    }
+
+    /**
+     * Set the connect timeout
+     *
+     * @param   float $timeout    The connect timeout for the request (in seconds, fractions of a second are okay. Default: 30 seconds)
+     * @return Builder
+     */
+    public function withConnectTimeout($timeout = 30.0)
+    {
+        return $this->withCurlOption( 'CONNECTTIMEOUT_MS', ($timeout * 1000) );
     }
 
     /**
@@ -154,7 +165,7 @@ class Builder {
      * Set any specific cURL option
      *
      * @param   string $key         The name of the cURL option
-     * @param   string $value       The value to which the option is to be set
+     * @param   mixed  $value       The value to which the option is to be set
      * @return Builder
      */
     public function withOption($key, $value)
@@ -233,8 +244,17 @@ class Builder {
      */
     public function withHeaders(array $headers)
     {
+        $data = array();
+        foreach( $headers as $key => $value ) {
+            if( !is_numeric($key) ) {
+                $value = $key .': '. $value;
+            }
+
+            $data[] = $value;
+        }
+
         $this->curlOptions[ 'HTTPHEADER' ] = array_merge(
-            $this->curlOptions[ 'HTTPHEADER' ], $headers
+            $this->curlOptions[ 'HTTPHEADER' ], $data
         );
 
         return $this;
@@ -379,6 +399,7 @@ class Builder {
       */
      public function download($fileName)
      {
+         $this->appendDataToURL();
          $this->packageOptions[ 'saveFile' ] = $fileName;
 
          return $this->send();
@@ -399,7 +420,7 @@ class Builder {
         }
 
         if( $this->packageOptions[ 'asJsonRequest' ] ) {
-            $parameters = json_encode($parameters);
+            $parameters = \json_encode($parameters);
         }
 
         $this->curlOptions[ 'POSTFIELDS' ] = $parameters;
@@ -454,7 +475,7 @@ class Builder {
      */
     public function delete()
     {
-        $this->appendDataToURL();
+        $this->setPostParameters();
 
         return $this->withOption('CUSTOMREQUEST', 'DELETE')
             ->send();
@@ -480,6 +501,7 @@ class Builder {
         // Create the request with all specified options
         $this->curlObject = curl_init();
         $options = $this->forgeOptions();
+
         curl_setopt_array( $this->curlObject, $options );
 
         // Send the request
@@ -535,7 +557,28 @@ class Builder {
             }
         }, array_filter(array_map('trim', explode("\r\n", $headerString)))));
 
-        return array_collapse($headers);
+        $results = array();
+
+        foreach( $headers as $values ) {
+            if( !is_array($values) ) {
+                continue;
+            }
+
+            $key = array_keys($values)[ 0 ];
+            if( isset($results[ $key ]) ) {
+                $results[ $key ] = array_merge(
+                    (array) $results[ $key ],
+                    array( array_values($values)[ 0 ] )
+                );
+            } else {
+                $results = array_merge(
+                    $results,
+                    $values
+                );
+            }
+        }
+
+        return $results;
     }
 
     /**
@@ -584,7 +627,7 @@ class Builder {
         foreach( $this->curlOptions as $key => $value ) {
             $arrayKey = constant( 'CURLOPT_' . $key );
 
-            if( !$this->packageOptions[ 'containsFile' ] && $key == 'POSTFIELDS' && is_array( $value ) ) {
+            if( !$this->packageOptions[ 'containsFile' ] && $key === 'POSTFIELDS' && is_array( $value ) ) {
                 $results[ $arrayKey ] = http_build_query( $value, null, '&' );
             } else {
                 $results[ $arrayKey ] = $value;

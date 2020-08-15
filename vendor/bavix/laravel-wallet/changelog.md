@@ -6,6 +6,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.4] - 2020-03-22
+### Fixed
+- fix `bindTo` method
+
+## [4.1.3] - 2020-03-20
+### Added
+- Added a patch from version 4.2.1 #150
+
+## [4.1.2] - 2019-01-20
+### Added
+- add `$amountFloat` to Transaction model
+
+## [4.1.1] - 2019-01-16
+### Changed
+- upgrade composer packages
+- add unit cases
+
+## [4.1.0] - 2019-12-15
+### Added
+- Added ability to override type
+
+## [4.0.1] - 2019-11-30
+### Fixed
+- Encountered error: "You are not the owner of the wallet" #129 @arjayosma
+
 ## [4.0.0] - 2019-10-04
 ### Added
 - Added interface `Storeable` for creating your own wallet balance repositories. #103
@@ -431,7 +456,12 @@ The operation is now executed in the transaction and updates the new `refund` fi
 - Exceptions: AmountInvalid, BalanceIsEmpty.
 - Models: Transfer, Transaction.
 
-[Unreleased]: https://github.com/bavix/laravel-wallet/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/bavix/laravel-wallet/compare/4.1.3...HEAD
+[4.1.3]: https://github.com/bavix/laravel-wallet/compare/4.1.2...4.1.3
+[4.1.2]: https://github.com/bavix/laravel-wallet/compare/4.1.1...4.1.2
+[4.1.1]: https://github.com/bavix/laravel-wallet/compare/4.1.0...4.1.1
+[4.1.0]: https://github.com/bavix/laravel-wallet/compare/4.0.1...4.1.0
+[4.0.1]: https://github.com/bavix/laravel-wallet/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/bavix/laravel-wallet/compare/3.3.0...4.0.0
 [3.3.0]: https://github.com/bavix/laravel-wallet/compare/3.2.1...3.3.0
 [3.2.1]: https://github.com/bavix/laravel-wallet/compare/3.2.0...3.2.1

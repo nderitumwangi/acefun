@@ -51,6 +51,28 @@ class Transfer extends Model
     ];
 
     /**
+     * @var array
+     */
+    protected $casts = [
+        'deposit_id' => 'int',
+        'withdraw_id' => 'int',
+        'fee' => 'int',
+    ];
+
+    /**
+     * @inheritDoc
+     */
+    public function getCasts(): array
+    {
+        $this->casts = array_merge(
+            $this->casts,
+            config('wallet.transfer.casts', [])
+        );
+
+        return parent::getCasts();
+    }
+
+    /**
      * @return string
      */
     public function getTable(): string
