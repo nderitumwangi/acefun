@@ -39,6 +39,7 @@
         "spatie/geocoder": "^3.6",
         "spatie/laravel-backup": "^6.11",
         "spatie/laravel-permission": "^2.37",
+        "symfony/dotenv": "^4.4",
         "twilio/sdk": "^5.36",
         "tymon/jwt-auth": "dev-develop",
         "vinkla/hashids": "^6.0",
