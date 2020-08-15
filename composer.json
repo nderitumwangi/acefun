@@ -16,7 +16,7 @@
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^2.0",
         "fzaninotto/faker": "^1.8",
-        "intervention/image": "^2.4",
+        "intervention/image": "^2.5",
         "ixudra/curl": "^6.16",
         "jackiedo/dotenv-editor": "^1.0",
         "jenssegers/agent": "^2.6",
